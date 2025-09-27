@@ -11,6 +11,9 @@
     --danger:#ef4444;
     --shadow:0 10px 30px rgba(0,0,0,.3);
     --radius:16px;
+  
+    /* unified control height for inputs/selects */
+    --control-h: 48px;
   }
   
   *{box-sizing:border-box}
@@ -74,12 +77,37 @@
   .checkin{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
   .field{display:flex;flex-direction:column;gap:8px}
   .label{font-size:12px;color:var(--muted)}
+  
+  /* Inputs & Selects — unified look */
   input,select{
     background:#0a1624;border:1px solid #1a3452;color:var(--ink);
     border-radius:12px;padding:12px 12px;outline:none;
+  
+    /* Force equal height everywhere */
+    height: var(--control-h);
+    line-height: calc(var(--control-h) - 2px);
+    font-size: 16px;
   }
   input::placeholder{color:#7f93aa}
   input:focus,select:focus{border-color:#1f80ff;box-shadow:0 0 0 3px #1f80ff22}
+  
+  /* Normalize the <select> so Safari/macOS doesn't render it shorter */
+  select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 36px;                 /* space for custom arrow */
+    background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23bcd3ef' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 16px;
+  }
+  /* Hide default arrow in old IE (harmless elsewhere) */
+  select::-ms-expand{ display:none; }
+  
+  /* Extra specificity guard in case something on Pages overrides it */
+  .checkin select{ height: var(--control-h) !important; }
   
   .btn{
     border:1px solid #2a3f58;background:#0f2033;color:#e7f3ff;
