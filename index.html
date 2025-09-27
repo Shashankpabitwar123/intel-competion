@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Intel — Team Sustainability Summit Check-In</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Celebration overlay -->
+  <div id="celebration" aria-hidden="true">
+    <div class="celebration-card" role="dialog" aria-live="assertive" aria-label="Celebration">
+      <h2>🎉 Goal Reached!</h2>
+      <p id="winnerLine">Amazing turnout.</p>
+      <button id="celebrationClose" class="btn">Close</button>
+    </div>
+    <!-- light confetti -->
+    <canvas id="confetti" aria-hidden="true"></canvas>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="brand">intel.</div>
+      <h1>TEAM SUSTAINABILITY SUMMIT</h1>
+      <p class="tagline">Check-in system for sustainability event attendees</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Attendance summary -->
+    <section class="summary" aria-label="Attendance Summary">
+      <div class="summary-line">
+        <span class="summary-icon" aria-hidden="true">👥</span>
+        <span>Attendance:&nbsp;<strong id="totalCount">0</strong> / <span id="goalCount">50</span></span>
+      </div>
+      <div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0" aria-label="Attendance progress">
+        <div id="progressBar" class="progress"></div>
+      </div>
+    </section>
+
+    <!-- Card -->
+    <section class="card">
+      <div id="greet" class="greet" aria-live="polite">👋 Welcome! Please check in below.</div>
+
+      <form id="checkinForm" class="checkin" autocomplete="off">
+        <label class="field">
+          <span class="label">Attendee Name</span>
+          <input id="nameInput" type="text" placeholder="Enter name…" required aria-required="true" />
+        </label>
+
+        <label class="field">
+          <span class="label">Team</span>
+          <select id="teamSelect" required aria-required="true">
+            <option value="" selected disabled>Select Team…</option>
+            <option value="water">💧 Team Water Wise</option>
+            <option value="netzero">🌿 Team Net Zero</option>
+            <option value="renewables">⚡ Team Renewables</option>
+          </select>
+        </label>
+
+        <button id="checkinBtn" class="btn primary" type="submit" disabled>Check In</button>
+      </form>
+
+      <!-- Team counters -->
+      <div class="teams" aria-label="Team Attendance">
+        <div class="team-card" id="card-water" data-team="water" tabindex="0" aria-label="Team Water Wise count">
+          <div class="team-name">💧 Team Water Wise</div>
+          <div class="team-count" id="count-water">0</div>
+        </div>
+        <div class="team-card" id="card-netzero" data-team="netzero" tabindex="0" aria-label="Team Net Zero count">
+          <div class="team-name">🌿 Team Net Zero</div>
+          <div class="team-count" id="count-netzero">0</div>
+        </div>
+        <div class="team-card" id="card-renewables" data-team="renewables" tabindex="0" aria-label="Team Renewables count">
+          <div class="team-name">⚡ Team Renewables</div>
+          <div class="team-count" id="count-renewables">0</div>
+        </div>
+      </div>
+
+      <!-- Attendee list -->
+      <div class="list-wrap">
+        <div class="list-head">
+          <h3>Attendees</h3>
+          <div class="list-actions">
+            <input id="searchInput" type="search" placeholder="Search attendees…" aria-label="Search attendees" />
+            <button id="exportBtn" class="btn">Export CSV</button>
+            <button id="resetBtn" class="btn ghost" title="Clear saved data">Reset</button>
+          </div>
+        </div>
+        <ul id="attendeeList" class="attendee-list" aria-live="polite"></ul>
+        <div id="emptyState" class="empty">No attendees yet. Be the first to check in!</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Intel Sustainability Summit • Built with ♻️ for a greener future</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
